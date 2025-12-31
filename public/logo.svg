@@ -1,0 +1,46 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient circle -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2563EB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60A5FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22D3EE;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main circle background -->
+  <circle cx="100" cy="100" r="95" fill="url(#logoGradient)"/>
+  
+  <!-- Globe/Network design -->
+  <circle cx="100" cy="100" r="70" stroke="white" stroke-width="3" fill="none" opacity="0.3"/>
+  <circle cx="100" cy="100" r="50" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Vertical meridian -->
+  <ellipse cx="100" cy="100" rx="25" ry="70" stroke="white" stroke-width="2.5" fill="none"/>
+  
+  <!-- Horizontal latitude lines -->
+  <line x1="30" y1="100" x2="170" y2="100" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <line x1="40" y1="70" x2="160" y2="70" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="40" y1="130" x2="160" y2="130" stroke="white" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Connection nodes/dots -->
+  <circle cx="100" cy="30" r="5" fill="white"/>
+  <circle cx="100" cy="170" r="5" fill="white"/>
+  <circle cx="30" cy="100" r="5" fill="white"/>
+  <circle cx="170" cy="100" r="5" fill="white"/>
+  <circle cx="60" cy="60" r="4" fill="white" opacity="0.8"/>
+  <circle cx="140" cy="60" r="4" fill="white" opacity="0.8"/>
+  <circle cx="60" cy="140" r="4" fill="white" opacity="0.8"/>
+  <circle cx="140" cy="140" r="4" fill="white" opacity="0.8"/>
+  
+  <!-- Center star/sparkle -->
+  <circle cx="100" cy="100" r="8" fill="white"/>
+  <path d="M100 88 L100 112 M88 100 L112 100" stroke="url(#accentGradient)" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Outer glow effect -->
+  <circle cx="100" cy="100" r="95" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+</svg>

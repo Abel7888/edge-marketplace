@@ -1,10 +1,22 @@
-import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext.jsx'
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
+import { useAuth } from '@/context/AuthContext'
 
 export default function ProtectedRoute({ children }){
   const { currentUser, loading } = useAuth()
-  const location = useLocation()
+  const router = useRouter()
+  const pathname = usePathname()
+  
+  useEffect(() => {
+    if (!loading && !currentUser) {
+      router.replace(`/login?from=${pathname}`)
+    }
+  }, [currentUser, loading, router, pathname])
+  
   if (loading) return null
-  if (!currentUser) return <Navigate to="/login" replace state={{ from: location.pathname }} />
+  if (!currentUser) return null
   return children
 }
+

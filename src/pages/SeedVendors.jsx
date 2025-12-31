@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../lib/firebase.js'
@@ -63,3 +66,4 @@ export default function SeedVendors(){
     </div>
   )
 }
+

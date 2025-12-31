@@ -1,5 +1,7 @@
+'use client'
+
 import { createContext, useContext, useEffect, useState } from 'react'
-import { auth, db, googleProvider } from '../lib/firebase'
+import { auth, db, googleProvider } from '@/lib/firebase'
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -63,11 +65,16 @@ export function AuthProvider({ children }){
   const value = { currentUser, loading, signup, login, loginWithGoogle, resetPassword, logout }
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }
 
 export function useAuth(){
-  return useContext(AuthContext)
+  const context = useContext(AuthContext)
+  if (context === null) {
+    return { currentUser: null, loading: true, signup: () => {}, login: () => {}, loginWithGoogle: () => {}, resetPassword: () => {}, logout: () => {} }
+  }
+  return context
 }
+

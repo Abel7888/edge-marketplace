@@ -1,7 +1,10 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Grid3X3 as Grid, GitCompare, PhoneCall, Heart, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { saveVendor as fsSaveVendor, removeSavedVendor as fsRemoveSavedVendor, subscribeSavedVendors as fsSubscribeSaved } from '../lib/firestoreSaved.js'
 import { createDemoRequest } from '../lib/firestoreRequests.js'
 import DemoRequestModal from '../components/DemoRequestModal.jsx'
@@ -71,7 +74,7 @@ function VendorCard({ v, saved, onToggleSave, onRequestDemo }){
 }
 
 export default function FinTech(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
   const [saved, setSaved] = useState(new Set())
   const [demoOpen, setDemoOpen] = useState(false)
@@ -91,7 +94,7 @@ export default function FinTech(){
     
     if (!currentUser){ 
       console.log('[FinTech toggleSaveVendor] No user, redirecting to login')
-      navigate('/login?redirect=/discover/fintech')
+      router.push('/login?redirect=/discover/fintech')
       return 
     }
     
@@ -112,7 +115,7 @@ export default function FinTech(){
         await fsSaveVendor(currentUser.uid, id, { ...vendor, category: 'FinTech' })
         console.log('[FinTech toggleSaveVendor] Save complete, navigating to /saved-new')
         console.log('[FinTech toggleSaveVendor] About to call navigate...')
-        navigate('/saved-new')
+        router.push('/saved-new')
         console.log('[FinTech toggleSaveVendor] Navigate called')
       }
     } catch (err) {
@@ -124,7 +127,7 @@ export default function FinTech(){
   }
 
   function openDemo(vendor){
-    if (!currentUser){ navigate('/login?redirect=/discover/fintech'); return }
+    if (!currentUser){ router.push('/login?redirect=/discover/fintech'); return }
     setDemoVendor(vendor)
     setDemoOpen(true)
   }
@@ -333,3 +336,4 @@ export default function FinTech(){
     </div>
   )
 }
+

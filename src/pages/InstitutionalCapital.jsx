@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState, useEffect } from 'react'
 import { BookOpen, Download, CheckCircle2, Mail, User, Building, Phone, TrendingUp, DollarSign, BarChart3 } from 'lucide-react'
 
@@ -305,3 +308,4 @@ export default function InstitutionalCapital() {
       </div>
   )
 }
+

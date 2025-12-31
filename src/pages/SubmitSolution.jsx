@@ -1,8 +1,12 @@
+﻿'use client'
+
+
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 
 export default function SubmitSolution(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const [form, setForm] = useState({
     company: '',
     website: '',
@@ -160,3 +164,4 @@ export default function SubmitSolution(){
     </div>
   )
 }
+

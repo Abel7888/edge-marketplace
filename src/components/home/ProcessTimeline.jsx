@@ -1,16 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
 import { Sparkles, Search, BarChart3, GitCompare, Handshake, CheckCircle2, ArrowRight } from 'lucide-react'
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.2 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
 
 export default function ProcessTimeline() {
   const [inView, setInView] = useState(false)
@@ -97,9 +87,9 @@ export default function ProcessTimeline() {
         </div>
 
         {/* Steps */}
-        <motion.div variants={container} initial="hidden" animate={inView ? 'show' : 'hidden'} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
           {steps.map((s, idx) => (
-            <motion.div key={s.num} variants={item} className="relative flex flex-col items-center text-center group">
+            <div key={s.num} className="relative flex flex-col items-center text-center group">
               {/* Number circle */}
               <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mb-8">
                 <div className="absolute inset-0 rounded-full border-4 border-dashed border-gray-200 group-hover:border-primary-300 transition-colors duration-500" />
@@ -132,9 +122,9 @@ export default function ProcessTimeline() {
                   <ArrowRight size={24} />
                 </div>
               )}
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Bottom CTA */}
         <div className="text-center mt-20 flex items-center justify-center">
@@ -146,3 +136,4 @@ export default function ProcessTimeline() {
     </section>
   )
 }
+

@@ -1,9 +1,13 @@
+﻿'use client'
+
+
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { Search, ArrowRight, Sparkles, TrendingUp, Heart, Briefcase } from 'lucide-react'
 
 export default function DiscoverNew() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
 
   const categories = [
@@ -180,7 +184,7 @@ export default function DiscoverNew() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
             <p className="text-lg text-blue-100 mb-8">Start exploring cutting-edge technology vendors today</p>
             <button
-              onClick={() => navigate('/discover/vendors')}
+              onClick={() => router.push('/discover/vendors')}
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all"
             >
               Browse All Vendors
@@ -192,3 +196,4 @@ export default function DiscoverNew() {
     </div>
   )
 }
+

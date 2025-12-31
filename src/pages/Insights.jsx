@@ -1,5 +1,9 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { Activity, Users, BarChart3, TrendingUp, ArrowUpRight, Sparkles, Star } from 'lucide-react'
 import vendorsData from '../data/vendors.js'
 
@@ -292,7 +296,7 @@ function Sparkline({ data, color='white' }){
 
 function IndustryCard({ ind }){
   const badge = ind.growth>30? '🔥 Hot' : ind.growth>=20? '⚡ Rising fast' : '📈 Steady'
-  const navigate = useNavigate()
+  const router = useRouter()
   const route = ind.key==='healthcare' ? '/insights/healthcare' : undefined
   return (
     <div onClick={()=> route && navigate(route)} className={`relative rounded-2xl border overflow-hidden bg-gradient-to-tr ${ind.color} group hover:-translate-y-1 hover:shadow-xl transition ${route? 'cursor-pointer' : ''}`}> 
@@ -350,7 +354,7 @@ function ActionCard({ title, body, cta, grad, icon }){
 }
 
 function Sidebar(){
-  const navigate = useNavigate()
+  const router = useRouter()
   return (
     <aside className="h-full flex flex-col">
       {/* Branding header */}
@@ -430,3 +434,4 @@ function Sidebar(){
     </aside>
   )
 }
+

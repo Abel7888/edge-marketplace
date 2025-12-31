@@ -1,6 +1,10 @@
+﻿'use client'
+
+
 import { useEffect, useState } from 'react'
-import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Login(){
   const { currentUser, login, loginWithGoogle, resetPassword } = useAuth()
@@ -9,11 +13,11 @@ export default function Login(){
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState('')
   const [info, setInfo] = useState('')
-  const navigate = useNavigate()
+  const router = useRouter()
 
   useEffect(() => {
-    if (currentUser) navigate('/discover', { replace: true })
-  }, [currentUser, navigate])
+    if (currentUser) router.replace('/discover')
+  }, [currentUser, router])
 
   async function onSubmit(e){
     e.preventDefault()
@@ -22,7 +26,7 @@ export default function Login(){
     setLoading(true)
     try {
       await login(email, password)
-      navigate('/discover')
+      router.push('/discover')
     } catch (e) {
       setErr(e.message || 'Failed to sign in')
     } finally {
@@ -36,7 +40,7 @@ export default function Login(){
     setLoading(true)
     try {
       await loginWithGoogle()
-      navigate('/discover')
+      router.push('/discover')
     } catch (e) {
       setErr(e.message || 'Google sign-in failed')
     } finally {
@@ -80,7 +84,7 @@ export default function Login(){
           <div className="mt-4 text-sm flex items-center justify-between">
             <button onClick={onReset} className="text-blue-600">Forgot password?</button>
             <span>
-              Don't have an account? <Link to="/signup" className="text-blue-600">Create one</Link>
+              Don't have an account? <Link href="/signup" className="text-blue-600">Create one</Link>
             </span>
           </div>
         </div>
@@ -88,3 +92,4 @@ export default function Login(){
     </div>
   )
 }
+

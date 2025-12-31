@@ -1,8 +1,11 @@
+'use client'
+
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function GoogleAnalytics() {
-  const location = useLocation()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     // Initialize Google Analytics
@@ -31,12 +34,12 @@ export default function GoogleAnalytics() {
     // Track page views on route change
     if (window.gtag) {
       window.gtag('event', 'page_view', {
-        page_path: location.pathname + location.search,
+        page_path: pathname + (searchParams?.toString() ? '?' + searchParams.toString() : ''),
         page_title: document.title,
         page_location: window.location.href
       })
     }
-  }, [location])
+  }, [pathname, searchParams])
 
   return null
 }
@@ -51,3 +54,4 @@ export function useAnalytics() {
 
   return { trackEvent }
 }
+

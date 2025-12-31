@@ -1,11 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Award, ChevronLeft, ChevronRight, CheckCircle2, Eye, BookOpen, Download, FileText, Sparkles, X, Mail, User, Building, Phone } from 'lucide-react'
 
-const fadeItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-}
 
 export default function FeaturedVendors() {
   const containerRef = useRef(null)
@@ -127,12 +122,8 @@ export default function FeaturedVendors() {
           onMouseLeave={() => setHovering(false)}
         >
           {vendors.map((v, i) => (
-            <motion.article
+            <article
               key={v.name}
-              variants={fadeItem}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
               className="flex-none basis-[85%] sm:basis-[48%] md:basis-[32%] lg:basis-[24%] xl:basis-[19%] snap-start group relative bg-white rounded-2xl border-2 border-gray-200 shadow-lg hover:shadow-2xl hover:border-blue-500 transition-all duration-500 overflow-hidden flex flex-col"
             >
               {/* Header strip to mirror PropTech */}
@@ -172,7 +163,7 @@ export default function FeaturedVendors() {
                   </a>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
 
@@ -196,13 +187,7 @@ export default function FeaturedVendors() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Buyers Guide Card */}
-            <motion.div
-              variants={fadeItem}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl border border-blue-200 shadow-lg hover:shadow-xl hover:border-blue-400 transition-all duration-300 overflow-hidden"
-            >
+            <div className="group relative bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-2xl border border-blue-200 shadow-lg hover:shadow-xl hover:border-blue-400 transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-bl-full" />
               
               <div className="relative p-6">
@@ -252,16 +237,10 @@ export default function FeaturedVendors() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* eBook Card */}
-            <motion.div
-              variants={fadeItem}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-purple-50 via-white to-blue-50 rounded-2xl border border-purple-200 shadow-lg hover:shadow-xl hover:border-purple-400 transition-all duration-300 overflow-hidden"
-            >
+            <div className="group relative bg-gradient-to-br from-purple-50 via-white to-blue-50 rounded-2xl border border-purple-200 shadow-lg hover:shadow-xl hover:border-purple-400 transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-bl-full" />
               
               <div className="relative p-6">
@@ -312,16 +291,10 @@ export default function FeaturedVendors() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* 2026 Multifamily Tech Buyer's Guide Card */}
-            <motion.div
-              variants={fadeItem}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-emerald-50 via-white to-teal-50 rounded-2xl border border-emerald-200 shadow-lg hover:shadow-xl hover:border-emerald-400 transition-all duration-300 overflow-hidden"
-            >
+            <div className="group relative bg-gradient-to-br from-emerald-50 via-white to-teal-50 rounded-2xl border border-emerald-200 shadow-lg hover:shadow-xl hover:border-emerald-400 transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-bl-full" />
               
               <div className="relative p-6">
@@ -363,16 +336,10 @@ export default function FeaturedVendors() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* 2026 AI Networking Buyer's Guide Card */}
-            <motion.div
-              variants={fadeItem}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-orange-50 via-white to-red-50 rounded-2xl border border-orange-200 shadow-lg hover:shadow-xl hover:border-orange-400 transition-all duration-300 overflow-hidden"
-            >
+            <div className="group relative bg-gradient-to-br from-orange-50 via-white to-red-50 rounded-2xl border border-orange-200 shadow-lg hover:shadow-xl hover:border-orange-400 transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-bl-full" />
               
               <div className="relative p-6">
@@ -414,7 +381,7 @@ export default function FeaturedVendors() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
@@ -476,15 +443,8 @@ function LeadMagnetModal({ resource, onClose }) {
   }
 
   return (
-    <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.2 }}
-          className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden"
-        >
+        <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden animate-fade-in">
           {/* Header with gradient */}
           <div className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 p-8 text-white overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20" />
@@ -606,9 +566,8 @@ function LeadMagnetModal({ resource, onClose }) {
               By downloading, you agree to receive occasional emails about our services. Unsubscribe anytime.
             </p>
           </form>
-        </motion.div>
+        </div>
       </div>
-    </AnimatePresence>
   )
 }
 
@@ -625,3 +584,4 @@ function taglineFor(v) {
   if (v.name === 'Cisco') return 'Networking, security, and observability'
   return 'Trusted technology vendor'
 }
+

@@ -1,18 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
 import { Sparkles, TrendingUp, Building2, ArrowUpRight, Brain, Link, Wifi, Cloud, Shield, Code, Glasses, DollarSign } from 'lucide-react'
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1 },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-}
 
 export default function CategoryShowcase() {
   const [inView, setInView] = useState(false)
@@ -128,16 +116,10 @@ export default function CategoryShowcase() {
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate={inView ? 'show' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((c, i) => (
-            <motion.article
+            <article
               key={c.name}
-              variants={item}
               className="group relative bg-white rounded-3xl p-8 shadow-soft hover:shadow-hard transition-all duration-500 hover:-translate-y-2 cursor-pointer border border-gray-100 overflow-hidden"
               onClick={() => handleClick(c.name)}
             >
@@ -178,9 +160,9 @@ export default function CategoryShowcase() {
               <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-gray-400 group-hover:text-primary-600 group-hover:bg-primary-50 transition-all">
                 <ArrowUpRight size={18} />
               </div>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
 
         <div className="text-center mt-16">
           <a href="/login" className="inline-flex items-center gap-2 bg-white border-2 border-gray-200 text-slate-900 px-8 py-4 rounded-xl font-semibold text-lg hover:border-primary-500 hover:text-primary-600 hover:shadow-lg transition-all">
@@ -192,3 +174,4 @@ export default function CategoryShowcase() {
     </section>
   )
 }
+

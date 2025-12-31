@@ -1,6 +1,10 @@
+﻿'use client'
+
+
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import {
   Bell,
   Search,
@@ -90,7 +94,7 @@ function SidebarSection({ title, children }){
 
 function SidebarGroup({ icon:Icon, label, items }){
   const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
+  const router = useRouter()
   return (
     <div className="px-2">
       <button
@@ -210,21 +214,21 @@ function Sidebar({ savedCount, userDisplayName, userInitials }){
         <SidebarSection title="Services & Solutions">
           <div className="px-2 space-y-1">
             <button
-              onClick={()=> navigate('/discover/certifications')}
+              onClick={()=> router.push('/discover/certifications')}
               className="w-full h-9 flex items-center gap-2 px-2 rounded-md text-sm text-gray-800 hover:bg-gray-100 transition"
             >
               <span className="text-[15px]">🎓</span>
               <span>AI Governance & Training</span>
             </button>
             <button
-              onClick={()=> navigate('/hire')}
+              onClick={()=> router.push('/hire')}
               className="w-full h-9 flex items-center gap-2 px-2 rounded-md text-sm text-gray-800 hover:bg-gray-100 transition"
             >
               <span className="text-[15px]">👥</span>
               <span>Hire Development Team</span>
             </button>
             <button
-              onClick={()=> navigate('/find-talent')}
+              onClick={()=> router.push('/find-talent')}
               className="w-full h-9 flex items-center gap-2 px-2 rounded-md text-sm text-gray-800 hover:bg-gray-100 transition"
             >
               <span className="text-[15px]">🔍</span>
@@ -784,4 +788,5 @@ export default function Interaction(){
     </div>
   )
 }
+
 

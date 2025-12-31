@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import HeroSection from '../components/home/HeroSection.jsx'
 import TrustBar from '../components/home/TrustBar.jsx'
@@ -44,3 +47,4 @@ export default function Home() {
     </main>
   )
 }
+

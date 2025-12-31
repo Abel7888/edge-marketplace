@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import { seedVendors, fetchVendorsOnce } from '../lib/firestoreVendors'
 
@@ -41,3 +44,4 @@ export default function AdminTools(){
     </div>
   )
 }
+

@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import Sidebar from '../components/layout/Sidebar.jsx'
 
@@ -34,3 +37,4 @@ export default function Dashboard() {
     </div>
   )
 }
+

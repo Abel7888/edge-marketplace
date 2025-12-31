@@ -1,13 +1,16 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+﻿'use client'
+
+
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 export default function RequestTalent(){
-  const navigate = useNavigate()
-  const location = useLocation()
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const prefill = useMemo(()=> ({
-    role: location.state?.role || '',
-    category: location.state?.category || '',
-  }), [location.state])
+    role: searchParams?.get('role') || '',
+    category: searchParams?.get('category') || '',
+  }), [searchParams])
 
   const [form, setForm] = useState({
     role: prefill.role,
@@ -55,7 +58,7 @@ export default function RequestTalent(){
       })
       if (response.ok) {
         alert('Request submitted successfully! We\'ll send top candidates within 24 hours.')
-        navigate('/find-talent')
+        router.push('/find-talent')
       } else {
         alert('There was an error submitting your request. Please try again.')
       }
@@ -71,7 +74,7 @@ export default function RequestTalent(){
         <h1 className="text-2xl font-extrabold">Request Vetted Talent</h1>
         <p className="mt-1 text-white/90">Tell us what you need — we\'ll send top candidates within 24 hours.</p>
         <div className="mt-3 text-sm">
-          <button className="h-9 px-3 rounded-lg bg-white text-indigo-700 font-semibold" onClick={()=> navigate('/find-talent')}>Back to Find Talent</button>
+          <button className="h-9 px-3 rounded-lg bg-white text-indigo-700 font-semibold" onClick={()=> router.push('/find-talent')}>Back to Find Talent</button>
         </div>
       </div>
 
@@ -162,3 +165,4 @@ export default function RequestTalent(){
     </div>
   )
 }
+

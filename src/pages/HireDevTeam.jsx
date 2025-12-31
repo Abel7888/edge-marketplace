@@ -1,5 +1,9 @@
+﻿'use client'
+
+
 import { useMemo, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { useAuth } from '../context/AuthContext.jsx'
 import { db } from '../lib/firebase.js'
 import { collection, addDoc, deleteDoc, query, where, getDocs, doc, serverTimestamp } from 'firebase/firestore'
@@ -188,7 +192,7 @@ const blockchainFirms = [
 ]
 
 export default function HireDevTeam(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
   const [activeTab, setActiveTab] = useState('firms')
   const [category, setCategory] = useState('ai')
@@ -224,7 +228,7 @@ export default function HireDevTeam(){
     if (!currentUser) {
       console.log('No current user, redirecting to login')
       alert('Please log in to save firms')
-      navigate('/login?redirect=/hire')
+      router.push('/login?redirect=/hire')
       return
     }
     
@@ -341,7 +345,7 @@ export default function HireDevTeam(){
             <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Build Your Product with Developers<br/>Experienced in Today's Leading Technologies</h1>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a href="#firms" className="h-14 px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg shadow-xl hover:scale-105 transition-transform inline-flex items-center">Browse Development Firms</a>
-              <button onClick={()=> navigate('/hire/request-information')} className="h-14 px-8 rounded-xl bg-white border-2 border-blue-600 text-blue-700 font-bold text-lg hover:bg-blue-50 transition-all">Tell Us More About Your Project</button>
+              <button onClick={()=> router.push('/hire/request-information')} className="h-14 px-8 rounded-xl bg-white border-2 border-blue-600 text-blue-700 font-bold text-lg hover:bg-blue-50 transition-all">Tell Us More About Your Project</button>
             </div>
           </div>
 
@@ -419,7 +423,7 @@ export default function HireDevTeam(){
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filtered.map(f => (
-                    <FirmCard key={f.id} f={f} saved={savedFirms.has(f.id)} onSave={() => toggleSaveFirm(f)} onOpen={() => { navigate('/hire/request-information', { state: { firmId: f.id, firmName: f.name } }) }} />
+                    <FirmCard key={f.id} f={f} saved={savedFirms.has(f.id)} onSave={() => toggleSaveFirm(f)} onOpen={() => { router.push('/hire/request-information', { state: { firmId: f.id, firmName: f.name } }) }} />
                   ))}
                 </div>
               </div>
@@ -537,3 +541,4 @@ function FirmCard({ f, saved, onSave, onOpen }){
 }
 
  
+

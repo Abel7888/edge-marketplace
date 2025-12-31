@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home,
   Compass,
@@ -117,25 +116,16 @@ export default function Sidebar({ activeKey = 'discover', onChange = () => {}, m
             </div>
           </div>
         )}
-        {entry.key === 'discover' && (
-          <AnimatePresence initial={false}>
-            {discoverOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="ml-9 mt-2 space-y-1 overflow-hidden"
-              >
+        {entry.key === 'discover' && discoverOpen && (
+              <div className="ml-9 mt-2 space-y-1">
                 {entry.submenu.map((s) => (
                   <button key={s.key} onClick={() => onChange(s.key)} className="relative w-full text-left px-3 py-1.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100">
                     <span className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-px bg-gray-300" />
                     <span className="ml-4">{s.label}</span>
                   </button>
                 ))}
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
-        )}
         {entry.key === 'hire' && hoverHire && (
           <div className="absolute left-full top-0 ml-3 w-64 bg-white rounded-xl shadow-hard p-3 z-50">
             <div className="font-semibold text-slate-900">Need developers?</div>
@@ -150,21 +140,13 @@ export default function Sidebar({ activeKey = 'discover', onChange = () => {}, m
 
   return (
     <div className="relative">
-      <AnimatePresence>
-        {mobileOpen && (
+      {mobileOpen && (
           <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               className="fixed inset-0 bg-black/40 z-40"
               onClick={onClose}
             />
-            <motion.aside
-              initial={{ x: -320 }}
-              animate={{ x: 0 }}
-              exit={{ x: -320 }}
-              transition={{ type: 'tween', duration: 0.2 }}
+            <aside
               className="fixed top-0 bottom-0 left-0 w-72 bg-gradient-to-b from-gray-50 to-white shadow-inner z-50 border-r border-gray-100"
             >
               <div className="h-16 flex items-center justify-between px-4 border-b border-gray-100">
@@ -207,10 +189,9 @@ export default function Sidebar({ activeKey = 'discover', onChange = () => {}, m
                   </button>
                 </div>
               </div>
-            </motion.aside>
+            </aside>
           </>
         )}
-      </AnimatePresence>
 
       <aside className="hidden md:block sticky top-16 h-[calc(100vh-4rem)] w-72 bg-gradient-to-b from-gray-50 to-white border-r border-gray-100 shadow-inner">
         <div className="overflow-y-auto h-full p-3">
@@ -253,3 +234,4 @@ export default function Sidebar({ activeKey = 'discover', onChange = () => {}, m
     </div>
   )
 }
+

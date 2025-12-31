@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect } from 'react'
 import { Menu, X, Grid, ShieldCheck, Layers, Building2, Stethoscope, Banknote, Landmark, Book, GraduationCap, Award, Shield, ClipboardList, CheckCircle2 } from 'lucide-react'
 
@@ -183,3 +186,4 @@ export default function Certifications() {
     </div>
   )
 }
+

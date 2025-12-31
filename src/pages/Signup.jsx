@@ -1,10 +1,14 @@
+﻿'use client'
+
+
 import { useState } from 'react'
-import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Signup(){
   const { signup, loginWithGoogle } = useAuth()
-  const navigate = useNavigate()
+  const router = useRouter()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,7 +23,7 @@ export default function Signup(){
     setLoading(true)
     try{
       await signup(email, password, { name, company, industry, role: 'buyer' })
-      navigate('/discover')
+      router.push('/discover')
     }catch(e){
       setErr(e.message || 'Failed to create account')
     }finally{ setLoading(false) }
@@ -30,7 +34,7 @@ export default function Signup(){
     setLoading(true)
     try{
       await loginWithGoogle()
-      navigate('/discover')
+      router.push('/discover')
     }catch(e){ setErr(e.message || 'Google sign-up failed') }
     finally{ setLoading(false) }
   }
@@ -69,9 +73,10 @@ export default function Signup(){
           <div className="mt-3">
             <button onClick={onGoogle} disabled={loading} className="w-full h-11 rounded-xl border font-semibold">Continue with Google</button>
           </div>
-          <div className="mt-4 text-sm">Already have an account? <Link to="/login" className="text-blue-600">Sign in</Link></div>
+          <div className="mt-4 text-sm">Already have an account? <Link href="/login" className="text-blue-600">Sign in</Link></div>
         </div>
       </div>
     </div>
   )
 }
+

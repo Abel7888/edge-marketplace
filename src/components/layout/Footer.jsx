@@ -1,5 +1,8 @@
+'use client'
+
 import { memo, useState } from 'react'
-import ContactModal from '../modals/ContactModal.jsx'
+import Link from 'next/link'
+import ContactModal from '@/components/modals/ContactModal'
 
 function Footer() {
   const [showContactModal, setShowContactModal] = useState(false)
@@ -11,15 +14,17 @@ function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-gray-600 text-sm">©2025 Edge Marketplace</div>
             <nav className="flex items-center gap-3 text-sm text-gray-600">
-              <a href="/about" className="hover:text-gray-900">About Us</a>
+              <Link href="/about" className="hover:text-gray-900">About Us</Link>
               <span>•</span>
-              <a href="/privacy" className="hover:text-gray-900">Privacy Policy</a>
+              <Link href="/privacy" className="hover:text-gray-900">Privacy Policy</Link>
               <span>•</span>
-              <a href="/terms" className="hover:text-gray-900">Terms of Service</a>
+              <Link href="/terms" className="hover:text-gray-900">Terms of Service</Link>
               <span>•</span>
-              <a href="/cookies" className="hover:text-gray-900">Cookie Policy</a>
+              <Link href="/cookies" className="hover:text-gray-900">Cookie Policy</Link>
               <span>•</span>
-              <a href="/sponsorship" className="hover:text-gray-900">Sponsorship</a>
+              <Link href="/sponsorship" className="hover:text-gray-900">Sponsorship</Link>
+              <span>•</span>
+              <Link href="/blog" className="hover:text-gray-900">Blog</Link>
               <span>•</span>
               <button 
                 onClick={() => setShowContactModal(true)}
@@ -41,3 +46,4 @@ function Footer() {
 }
 
 export default Footer
+

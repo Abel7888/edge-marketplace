@@ -1,7 +1,11 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Grid3X3 as Grid, GitCompare, PhoneCall, Heart, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { saveVendor as fsSaveVendor, removeSavedVendor as fsRemoveSavedVendor, subscribeSavedVendors as fsSubscribeSaved } from '../lib/firestoreSaved.js'
 import { createDemoRequest } from '../lib/firestoreRequests.js'
 import DemoRequestModal from '../components/DemoRequestModal.jsx'
@@ -80,7 +84,7 @@ function VendorCard({ v, saved, onToggleSave, onRequestDemo }){
 
 export default function MedTech(){
   const { currentUser } = useAuth()
-  const navigate = useNavigate()
+  const router = useRouter()
   const [saved, setSaved] = useState(new Set())
   const [demoOpen, setDemoOpen] = useState(false)
   const [demoVendor, setDemoVendor] = useState(null)
@@ -94,7 +98,7 @@ export default function MedTech(){
   }, [currentUser])
 
   async function toggleSaveVendor(vendor){
-    if (!currentUser){ navigate('/login?redirect=/discover/medtech'); return }
+    if (!currentUser){ router.push('/login?redirect=/discover/medtech'); return }
     const id = String(vendor.id)
     const wasSaved = saved.has(id)
     setSaved(prev=> { const n = new Set(prev); wasSaved? n.delete(id): n.add(id); return n })
@@ -103,7 +107,7 @@ export default function MedTech(){
         await fsRemoveSavedVendor(currentUser.uid, id)
       } else {
         await fsSaveVendor(currentUser.uid, id, { ...vendor, category: 'MedTech' })
-        navigate('/saved-new')
+        router.push('/saved-new')
       }
     } catch {
       setSaved(prev=> { const n = new Set(prev); wasSaved? n.add(id): n.delete(id); return n })
@@ -197,7 +201,7 @@ export default function MedTech(){
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {devices.map(v => (
               <VendorCard key={v.id} v={v} saved={saved.has(v.id)} onToggleSave={()=> toggleSaveVendor(v)} onRequestDemo={()=>{
-                if (!currentUser){ navigate('/login?redirect=/discover/medtech'); return }
+                if (!currentUser){ router.push('/login?redirect=/discover/medtech'); return }
                 setDemoVendor(v); setDemoOpen(true)
               }} />
             ))}
@@ -220,7 +224,7 @@ export default function MedTech(){
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {virtualCare.map(v => (
               <VendorCard key={v.id} v={v} saved={saved.has(v.id)} onToggleSave={()=> toggleSaveVendor(v)} onRequestDemo={()=>{
-                if (!currentUser){ navigate('/login?redirect=/discover/medtech'); return }
+                if (!currentUser){ router.push('/login?redirect=/discover/medtech'); return }
                 setDemoVendor(v); setDemoOpen(true)
               }} />
             ))}
@@ -243,7 +247,7 @@ export default function MedTech(){
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {bioeng.map(v => (
               <VendorCard key={v.id} v={v} saved={saved.has(v.id)} onToggleSave={()=> toggleSaveVendor(v)} onRequestDemo={()=>{
-                if (!currentUser){ navigate('/login?redirect=/discover/medtech'); return }
+                if (!currentUser){ router.push('/login?redirect=/discover/medtech'); return }
                 setDemoVendor(v); setDemoOpen(true)
               }} />
             ))}
@@ -266,7 +270,7 @@ export default function MedTech(){
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
             {startups.map(v => (
               <VendorCard key={v.id} v={v} saved={saved.has(v.id)} onToggleSave={()=> toggleSaveVendor(v)} onRequestDemo={()=>{
-                if (!currentUser){ navigate('/login?redirect=/discover/medtech'); return }
+                if (!currentUser){ router.push('/login?redirect=/discover/medtech'); return }
                 setDemoVendor(v); setDemoOpen(true)
               }} />
             ))}
@@ -282,3 +286,4 @@ export default function MedTech(){
     </div>
   )
 }
+

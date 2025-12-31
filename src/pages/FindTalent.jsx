@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import { ArrowRight, CheckCircle2, Sparkles, Target, Zap, Eye, DollarSign, Send, Users, Calendar, MessageSquare, ChevronDown, ChevronUp, Shield, Award, Globe } from 'lucide-react'
 
@@ -604,3 +607,4 @@ function TalentCategory({ title, talents, count }) {
     </div>
   )
 }
+

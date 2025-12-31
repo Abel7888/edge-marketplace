@@ -1,7 +1,11 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Grid3X3 as Grid, GitCompare, PhoneCall, Heart, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { saveVendor as fsSaveVendor, removeSavedVendor as fsRemoveSavedVendor, subscribeSavedVendors as fsSubscribeSaved } from '../lib/firestoreSaved.js'
 import { createDemoRequest } from '../lib/firestoreRequests.js'
 import DemoRequestModal from '../components/DemoRequestModal.jsx'
@@ -67,7 +71,7 @@ function VendorCard({ v, saved, onToggleSave, onRequestDemo }){
 }
 
 export default function SemiconductorManufacturers(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
   const [saved, setSaved] = useState(new Set())
   const [demoOpen, setDemoOpen] = useState(false)
@@ -82,7 +86,7 @@ export default function SemiconductorManufacturers(){
   }, [currentUser])
 
   async function toggleSaveVendor(vendorId){
-    if (!currentUser){ navigate('/login?redirect=/discover/semiconductor-manufacturers'); return }
+    if (!currentUser){ router.push('/login?redirect=/discover/semiconductor-manufacturers'); return }
     const id = String(vendorId)
     const wasSaved = saved.has(id)
     setSaved(prev=> { const n = new Set(prev); wasSaved? n.delete(id): n.add(id); return n })
@@ -92,7 +96,7 @@ export default function SemiconductorManufacturers(){
   }
 
   function openDemo(vendor){
-    if (!currentUser){ navigate('/login?redirect=/discover/semiconductor-manufacturers'); return }
+    if (!currentUser){ router.push('/login?redirect=/discover/semiconductor-manufacturers'); return }
     setDemoVendor(vendor)
     setDemoOpen(true)
   }
@@ -175,3 +179,4 @@ export default function SemiconductorManufacturers(){
     </div>
   )
 }
+

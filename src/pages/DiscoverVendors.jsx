@@ -1,18 +1,21 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
-import { subscribeVendors } from '../lib/firestoreVendors.js'
-import { useAuth } from '../context/AuthContext.jsx'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { subscribeVendors } from '@/lib/firestoreVendors'
+import { useAuth } from '@/context/AuthContext'
 import { saveVendor as fsSaveVendor, removeSavedVendor as fsRemoveSavedVendor, subscribeSavedVendors as fsSubscribeSaved } from '../lib/firestoreSaved.js'
 import { ArrowRight, CheckCircle2, Search, Funnel, ChevronRight, LayoutGrid, List, BarChart3, Heart, Shield, Eye, Download, Play, Gift, Calculator, Star, Quote, Loader2, X, Mail, Building2, Briefcase, Phone, Users as UsersIcon, Calendar, Building, Package, Target as TargetIcon, DollarSign, GraduationCap } from 'lucide-react'
 
 export default function DiscoverVendors() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const searchParams = useSearchParams()
   const [allVendors, setAllVendors] = useState([])
   const [vendorsLoading, setVendorsLoading] = useState(true)
   const [selectedSection, setSelectedSection] = useState('Industry')
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category'))
+  const [selectedCategory, setSelectedCategory] = useState(searchParams?.get('category') || null)
   const [quickFilters, setQuickFilters] = useState({ verified: false, featured: false, freeTrial: false, enterprise: false })
   const [view, setView] = useState('grid')
   const [query, setQuery] = useState('')
@@ -509,9 +512,10 @@ function ContactVendorModal(props){
   }, [allVendors, debouncedTerm, selectedCategory, quickFilters, sortBy, activeFilters])
 
   useEffect(() => {
-    if (selectedCategory) setSearchParams({ category: selectedCategory })
-    else setSearchParams({})
-  }, [selectedCategory, setSearchParams])
+    if (selectedCategory) {
+      router.replace(`/discover?category=${selectedCategory}`, { scroll: false })
+    }
+  }, [selectedCategory, router])
 
   useEffect(() => {
     setLoading(true)
@@ -1994,3 +1998,4 @@ function CompareBar({ vendors, onClear }) {
     </div>
   )
 }
+

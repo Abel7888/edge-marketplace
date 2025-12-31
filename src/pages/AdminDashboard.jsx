@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Home, Building2, ClipboardList, Users, ShieldCheck, Briefcase, BarChart3, DollarSign, Mail, Settings, ChevronDown, Download, Plus, Search as SearchIcon, MoreHorizontal, ToggleLeft, ToggleRight, Star, CheckCircle2, AlertTriangle, CalendarClock } from 'lucide-react'
 import vendorsData from '../data/vendors.js'
@@ -314,3 +317,4 @@ function Toggle({ defaultChecked }){
     </button>
   )
 }
+

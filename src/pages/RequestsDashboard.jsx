@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { FileText, Clock, MessageSquare, CheckCircle, ChevronDown, Search as SearchIcon, MoreHorizontal, Check, X, Download } from 'lucide-react'
 
@@ -310,3 +313,4 @@ function ResponseBadge({ minutes }) {
   if (minutes <= 2880) return <span className="text-amber-700 text-sm">1-2 days</span>
   return <span className="text-red-700 text-sm">&gt; 2 days</span>
 }
+

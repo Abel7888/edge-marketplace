@@ -1,13 +1,15 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+﻿'use client'
+
+
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 export default function RequestInformation(){
-  const navigate = useNavigate()
-  const location = useLocation()
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const prefillFirm = useMemo(()=>{
-    const state = location.state||{}
-    return { firmId: state.firmId||'', firmName: state.firmName||'' }
-  }, [location.state])
+    return { firmId: searchParams?.get('firmId')||'', firmName: searchParams?.get('firmName')||'' }
+  }, [searchParams])
 
   const [form, setForm] = useState({
     projectName: '',
@@ -157,3 +159,4 @@ export default function RequestInformation(){
     </div>
   )
 }
+

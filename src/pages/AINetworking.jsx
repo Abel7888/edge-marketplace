@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState, useEffect } from 'react'
 import { BookOpen, Download, CheckCircle2, Mail, User, Building, Phone, Network, Zap, AlertTriangle, TrendingUp } from 'lucide-react'
 
@@ -319,3 +322,4 @@ export default function AINetworking() {
       </div>
   )
 }
+

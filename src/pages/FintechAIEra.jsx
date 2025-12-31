@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState, useEffect } from 'react'
 import { BookOpen, Download, CheckCircle2, Mail, User, Building, Phone, TrendingUp, AlertTriangle, Shield, Clock } from 'lucide-react'
 
@@ -258,3 +261,4 @@ export default function FintechAIEra() {
     </div>
   )
 }
+

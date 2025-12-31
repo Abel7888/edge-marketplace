@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { Building2, Users, Target, Zap, Shield, Globe, CheckCircle2, TrendingUp, Search, BarChart3, Handshake, Rocket } from 'lucide-react'
 
 export default function About() {
@@ -300,3 +303,4 @@ export default function About() {
     </div>
   )
 }
+

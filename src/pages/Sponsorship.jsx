@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState } from 'react'
 import { Check, TrendingUp, Users, Mail, BarChart3, Target, Zap, Globe, X, Building, Phone, MessageSquare, BookOpen, Download, CheckCircle2, Sparkles } from 'lucide-react'
 import ContactModal from '../components/modals/ContactModal.jsx'
@@ -652,3 +655,4 @@ function SponsorshipModal({ package: pkg, onClose }) {
 }
 
 export default Sponsorship
+

@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect, useState } from 'react'
 import { Activity, HeartPulse, Users, BarChart3, TrendingUp, Star, FileText, Calendar, ArrowUpRight } from 'lucide-react'
 
@@ -198,3 +201,4 @@ export default function HealthcareInsights(){
     </div>
   )
 }
+

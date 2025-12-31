@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useState, useEffect } from 'react'
 import { BookOpen, Download, CheckCircle2, Mail, User, Building, Phone, Shield, FileText, Scale, Clock } from 'lucide-react'
 
@@ -258,3 +261,4 @@ export default function HealthcareApproval() {
     </div>
   )
 }
+

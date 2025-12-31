@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect, useState } from 'react'
 import { Heart, ExternalLink, Trash2, Calendar, FileText, CheckCircle2, MapPin, Star, Building2, Globe, X, Send, Users, TrendingUp, Award } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
@@ -579,3 +582,4 @@ function RequestModal({ type, vendor, currentUser, onClose }) {
     </div>
   )
 }
+

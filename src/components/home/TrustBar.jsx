@@ -83,3 +83,4 @@ function LogoItem({ name, gradient = 'from-gray-100 to-gray-200' }) {
     </div>
   )
 }
+

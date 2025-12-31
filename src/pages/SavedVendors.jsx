@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Heart, ExternalLink, Trash2, Calendar, FileText } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
@@ -251,3 +254,4 @@ function EmptyState(){
     </div>
   )
 }
+

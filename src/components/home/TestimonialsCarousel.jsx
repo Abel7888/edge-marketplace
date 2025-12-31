@@ -1,11 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, Star, Quote, Play, Edit, ChevronRight } from 'lucide-react'
 
-const fadeItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-}
 
 export default function TestimonialsCarousel() {
   const [filter, setFilter] = useState('All')
@@ -201,20 +196,13 @@ export default function TestimonialsCarousel() {
       </div>
 
       {/* Modal */}
-      <AnimatePresence>
-        {modal && (
-          <motion.div
+      {modal && (
+          <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             onClick={() => setModal(null)}
           >
-            <motion.div
+            <div
               className="relative max-w-3xl w-full bg-white rounded-3xl p-6 md:p-8"
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 20, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
               <button className="absolute top-3 right-3 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200" onClick={() => setModal(null)} aria-label="Close" />
@@ -241,10 +229,9 @@ export default function TestimonialsCarousel() {
                   <div className="text-gray-600 text-sm">{modal.author.title} • {modal.author.company}</div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
     </section>
   )
 }
@@ -256,11 +243,7 @@ function TestimonialCard({ t, onOpen }) {
 
 function TextCard({ t, onOpen }) {
   return (
-    <motion.article
-      variants={fadeItem}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+    <article
       onClick={onOpen}
       className={`group relative bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 shadow-soft hover:shadow-hard transition-all duration-500 hover:-translate-y-2 border border-gray-100 cursor-pointer overflow-hidden`}
     >
@@ -296,17 +279,13 @@ function TextCard({ t, onOpen }) {
       <span className="absolute bottom-6 right-6 opacity-20 group-hover:opacity-40 transition-opacity font-semibold text-gray-500">
         {t.logo}
       </span>
-    </motion.article>
+    </article>
   )
 }
 
 function VideoCard({ t, onOpen }) {
   return (
-    <motion.article
-      variants={fadeItem}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+    <article
       onClick={onOpen}
       className="group relative bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-8 shadow-soft hover:shadow-hard transition-all duration-500 hover:-translate-y-2 border border-gray-100 cursor-pointer overflow-hidden"
     >
@@ -347,7 +326,7 @@ function VideoCard({ t, onOpen }) {
       <span className="absolute top-6 left-6 bg-white/80 backdrop-blur-sm text-primary-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-primary-100">
         {t.category}
       </span>
-    </motion.article>
+    </article>
   )
 }
 
@@ -362,3 +341,4 @@ function Avatar({ a }) {
     </div>
   )
 }
+

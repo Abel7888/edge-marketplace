@@ -1,7 +1,11 @@
+﻿'use client'
+
+
 import { useEffect, useMemo, useState } from 'react'
 import { Grid3X3 as Grid, GitCompare, PhoneCall, Heart, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { saveVendor as fsSaveVendor, removeSavedVendor as fsRemoveSavedVendor, subscribeSavedVendors as fsSubscribeSaved } from '../lib/firestoreSaved.js'
  
 
@@ -65,7 +69,7 @@ function VendorCard({ v, saved, onToggleSave }){
 }
 
 export default function HealthTech(){
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
   const [saved, setSaved] = useState(new Set())
 
@@ -78,7 +82,7 @@ export default function HealthTech(){
   }, [currentUser])
 
   async function toggleSaveVendor(vendor){
-    if (!currentUser){ navigate('/login?redirect=/discover/healthtech'); return }
+    if (!currentUser){ router.push('/login?redirect=/discover/healthtech'); return }
     const id = String(vendor.id)
     const wasSaved = saved.has(id)
     setSaved(prev=> { const n = new Set(prev); wasSaved? n.delete(id): n.add(id); return n })
@@ -87,7 +91,7 @@ export default function HealthTech(){
         await fsRemoveSavedVendor(currentUser.uid, id)
       } else {
         await fsSaveVendor(currentUser.uid, id, { ...vendor, category: 'HealthTech' })
-        navigate('/saved-new')
+        router.push('/saved-new')
       }
     } catch {
       setSaved(prev=> { const n = new Set(prev); wasSaved? n.add(id): n.delete(id); return n })
@@ -274,3 +278,4 @@ export default function HealthTech(){
     </div>
   )
 }
+

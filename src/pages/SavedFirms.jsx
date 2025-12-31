@@ -1,19 +1,23 @@
+﻿'use client'
+
+
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { useRouter } from 'next/navigation'
 import { useAuth } from '../context/AuthContext.jsx'
 import { db } from '../lib/firebase.js'
 import { collection, query, where, getDocs, doc, updateDoc, deleteDoc, addDoc, serverTimestamp } from 'firebase/firestore'
 import { Heart, DollarSign, Users, MapPin, Code, Briefcase, Star, Trash2, CheckCircle2, Globe, MessageSquare, FileText, Search, Send, Check } from 'lucide-react'
 
 export default function SavedFirms() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { currentUser } = useAuth()
   const [savedFirms, setSavedFirms] = useState([])
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     if (!currentUser) {
-      navigate('/login?redirect=/saved-firms')
+      router.push('/login?redirect=/saved-firms')
       return
     }
     loadSavedFirms()
@@ -166,7 +170,7 @@ export default function SavedFirms() {
             </div>
             <h3 className="text-2xl font-bold text-slate-900 mb-2">No Saved Firms Yet</h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">Start building your collection by saving firms you're interested in working with</p>
-            <button onClick={() => navigate('/hire')} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
+            <button onClick={() => router.push('/hire')} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
               <Briefcase size={20} />
               Browse Development Firms
             </button>
@@ -377,7 +381,7 @@ export default function SavedFirms() {
                       {/* Bottom Actions */}
                       <div className="grid grid-cols-2 gap-2">
                         <button 
-                          onClick={() => navigate('/hire/request-information', { state: { firmId: firm.firmId, firmName: firm.firmName } })}
+                          onClick={() => router.push('/hire/request-information', { state: { firmId: firm.firmId, firmName: firm.firmName } })}
                           className="h-10 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold hover:scale-105 transition-transform flex items-center justify-center gap-1.5 shadow-lg">
                           <MessageSquare size={14} />
                           Get Info
@@ -404,3 +408,4 @@ export default function SavedFirms() {
     </div>
   )
 }
+

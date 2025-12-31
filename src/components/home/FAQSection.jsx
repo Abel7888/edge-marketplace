@@ -1,14 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { HelpCircle, MessageCircleQuestion, ArrowRight, Search as SearchIcon, Plus, Minus, ThumbsUp, ThumbsDown, MessageCircle } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export default function FAQSection({ onContactClick }) {
   const [query, setQuery] = useState('')
   const [openIndex, setOpenIndex] = useState(-1)
   const [inView, setInView] = useState(false)
   const sectionRef = useRef(null)
-  const listRef = useRef([])
-
+  
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
@@ -75,22 +73,10 @@ export default function FAQSection({ onContactClick }) {
 
   const handleToggle = (idx) => {
     setOpenIndex((prev) => (prev === idx ? -1 : idx))
-    const el = listRef.current[idx]
-    if (el) {
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 10)
-    }
   }
 
   const onKeyDown = (e, idx) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      const next = Math.min(idx + 1, filteredFaqs.length - 1)
-      listRef.current[next]?.focus()
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      const prev = Math.max(idx - 1, 0)
-      listRef.current[prev]?.focus()
-    } else if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       handleToggle(idx)
     } else if (e.key === 'Escape') {
@@ -101,12 +87,7 @@ export default function FAQSection({ onContactClick }) {
   return (
     <section ref={sectionRef} className="relative py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-16">
-        <motion.aside
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="lg:col-span-2"
-        >
+        <aside className="lg:col-span-2">
           <div className="text-primary-600 font-bold text-sm uppercase tracking-wider mb-4 inline-flex items-center gap-2">
             <HelpCircle size={16} />
             FAQs
@@ -128,14 +109,9 @@ export default function FAQSection({ onContactClick }) {
           </div>
 
           {/* Removed response time and support availability metrics */}
-        </motion.aside>
+        </aside>
 
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="lg:col-span-3"
-        >
+        <div className="lg:col-span-3">
           <div className="mb-8 relative">
             <input
               type="text"
@@ -152,7 +128,6 @@ export default function FAQSection({ onContactClick }) {
             {filteredFaqs.map((f, idx) => (
               <AccordionItem
                 key={f.q}
-                ref={(el) => (listRef.current[idx] = el)}
                 index={idx}
                 question={f.q}
                 answer={f.a}
@@ -164,28 +139,16 @@ export default function FAQSection({ onContactClick }) {
           </div>
 
           {/* Removed bottom CTA block for a cleaner FAQ section */}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
 }
 
-const AccordionItem = ({ question, answer, open, onToggle, index, onKeyDown }, ref) => {
-  const contentRef = useRef(null)
-  const [height, setHeight] = useState(0)
-
-  useEffect(() => {
-    if (open && contentRef.current) {
-      setHeight(contentRef.current.scrollHeight)
-    } else {
-      setHeight(0)
-    }
-  }, [open])
-
+function AccordionItem({ question, answer, open, onToggle, index, onKeyDown }) {
   return (
     <div className="group border border-gray-200 rounded-2xl bg-white hover:border-primary-200 hover:shadow-md transition-all duration-300 overflow-hidden">
       <button
-        ref={ref}
         className={`w-full px-8 py-6 flex items-center justify-between text-left transition-all ${open ? 'bg-gradient-to-r from-primary-50/50 to-accent-50/50' : 'hover:bg-gray-50'}`}
         aria-expanded={open}
         aria-controls={`faq-${index}`}
@@ -200,17 +163,13 @@ const AccordionItem = ({ question, answer, open, onToggle, index, onKeyDown }, r
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
+      {open && (
+          <div
             id={`faq-${index}`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height, opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
+            style={{ maxHeight: open ? '500px' : '0', transition: 'max-height 0.3s ease-in-out' }}
           >
-            <div ref={contentRef} className="px-8 pb-6 pt-0">
+            <div className="px-8 pb-6 pt-0">
               <div className="text-gray-700 leading-relaxed text-base prose prose-p:mb-4 prose-ul:list-disc prose-ul:pl-6">
                 {answer.split('\n').map((line, i) => (
                   <p key={i}>{line}</p>
@@ -228,15 +187,9 @@ const AccordionItem = ({ question, answer, open, onToggle, index, onKeyDown }, r
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   )
 }
 
-const _Accordion = typeof forwardRef === 'function' ? forwardRef(AccordionItem) : (props) => AccordionItem(props, null)
-function forwardRef(render) { return render }
-AccordionItem.displayName = 'AccordionItem'
-
-export { _Accordion as AccordionItem }

@@ -1,0 +1,9 @@
+{
+  "/discover/page": "app/discover/page.js",
+  "/discover/healthtech/page": "app/discover/healthtech/page.js",
+  "/discover/contech/page": "app/discover/contech/page.js",
+  "/discover/ml/page": "app/discover/ml/page.js",
+  "/about/page": "app/about/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/page": "app/page.js"
+}

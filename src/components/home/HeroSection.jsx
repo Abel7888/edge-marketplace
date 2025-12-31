@@ -1,16 +1,9 @@
+'use client'
+
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { Sparkles, Search, ChevronDown, ArrowRight, Compass, Plus, Play, Building2, Star, Users, TrendingUp, Brain, Shield, Cloud, Calendar, CheckCircle2, Wifi } from 'lucide-react'
 
-const staggerContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-}
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
 
 export default function HeroSection() {
   const [query, setQuery] = useState('')
@@ -19,7 +12,7 @@ export default function HeroSection() {
   const [category, setCategory] = useState('All Categories')
   const metricsRef = useRef(null)
   const [visible, setVisible] = useState(false)
-  const navigate = useNavigate()
+  const router = useRouter()
 
   // Count-up numbers once metrics enter viewport
   const [counts, setCounts] = useState({ vendors: 0, firms: 0, talent: 0, courses: 0 })
@@ -85,31 +78,31 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center">
-        <motion.div variants={staggerContainer} initial="hidden" animate="show" className="grid lg:grid-cols-2 gap-16 items-center w-full">
+        <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
           {/* Left column */}
           <div>
-            <motion.div variants={fadeUp}>
+            <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-8 text-white text-sm font-medium hover:bg-white/20 transition-colors">
                 <Sparkles size={16} className="text-yellow-400" />
                 Emerging Tech Marketplace
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
               Discover & Connect with Tomorrow's
               <br />
               <span className="inline-block bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent bg-200 animate-gradient-x">Technology Leaders</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p variants={fadeUp} className="text-xl lg:text-2xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
+            <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
               Your one-stop marketplace to discover, review, demo, and procure cutting-edge solutions from verified emerging tech vendors. AI, Blockchain, IoT, and beyond.
-            </motion.p>
+            </p>
 
             {/* Search bar */}
-            <motion.div variants={fadeUp} className="relative max-w-2xl mb-8">
+            <div className="relative max-w-2xl mb-8">
               <form
                 className="flex items-center bg-white rounded-2xl shadow-hard p-2"
-                onSubmit={(e) => { e.preventDefault(); navigate('/login') }}
+                onSubmit={(e) => { e.preventDefault(); router.push('/login') }}
               >
                 <Search size={20} className="text-gray-400 ml-4" />
                 <input
@@ -139,15 +132,8 @@ export default function HeroSection() {
                 </button>
               </form>
 
-              <AnimatePresence>
-                {suggestOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-hard p-4"
-                  >
+              {suggestOpen && (
+                  <div className="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-hard p-4 animate-fade-in">
                     <div className="text-xs uppercase text-gray-400 px-2 mb-2">Suggestions</div>
                     <div className="grid sm:grid-cols-2 gap-2">
                       {['AI agents', 'Blockchain KYC', 'IoT sensors', 'Cloud cost tools', 'RAG platforms', 'DevSecOps'].map((s) => (
@@ -156,13 +142,12 @@ export default function HeroSection() {
                         </button>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
-            </motion.div>
+            </div>
 
             {/* CTA buttons (shown even with search) */}
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <a className="bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-hard inline-flex items-center gap-2" href="/signup">
                 <Compass size={20} />
                 View Vendors
@@ -175,14 +160,14 @@ export default function HeroSection() {
                 <Plus size={20} />
                 Add Vendor
               </a>
-            </motion.div>
+            </div>
 
             {/* Trust metrics */}
-            <motion.div variants={fadeUp} ref={metricsRef} className="flex flex-wrap items-center gap-12 mt-12 pt-8 border-t border-white/10">
+            <div ref={metricsRef} className="flex flex-wrap items-center gap-12 mt-12 pt-8 border-t border-white/10">
               <Metric icon={Building2} value={`${counts.vendors.toLocaleString()}+`} label="vendors across 50+ categories" />
               <Metric icon={Star} value={`${counts.firms.toLocaleString()}+`} label="software development firms" />
               <Metric icon={Users} value={`${counts.talent.toLocaleString()}+`} label="pre-vetted tech talent pool" />
-            </motion.div>
+            </div>
           </div>
 
           {/* Right column visuals (desktop) */}
@@ -225,7 +210,7 @@ export default function HeroSection() {
               large
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
@@ -251,13 +236,9 @@ function Metric({ icon: Icon, value, label }) {
 
 function VendorCard({ className = '', logoGradient = 'from-blue-500 to-purple-600', icon: Icon, company, category, stats = [], verified = false, delay = 0, large = false }) {
   return (
-    <motion.div
-      className={`group bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-hard hover:shadow-glow-primary transition-all duration-500 hover:scale-105 hover:rotate-0 w-80 ${className}`}
-      style={{ animationDelay: `${delay}s` }}
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.1 + delay }}
-      whileHover={{ scale: 1.05, rotate: 0 }}
+    <div
+      className={`group bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-hard hover:shadow-glow-primary transition-all duration-500 hover:scale-105 hover:rotate-0 w-80 animate-fade-in ${className}`}
+      style={{ animationDelay: `${delay * 0.1}s` }}
     >
       <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${logoGradient} flex items-center justify-center mb-4`}>
         <Icon className="text-white" size={28} />
@@ -284,10 +265,11 @@ function VendorCard({ className = '', logoGradient = 'from-blue-500 to-purple-60
           <CheckCircle2 size={16} className="text-green-400" />
         </div>
       )}
-    </motion.div>
+    </div>
   )
 }
 
 function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3)
 }
+

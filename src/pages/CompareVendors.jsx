@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { CheckCircle2, ChevronRight, Loader2, ShieldCheck, BarChart3, Zap, ArrowUp, ArrowDown, Plus, X, Search } from 'lucide-react'
 
@@ -364,3 +367,4 @@ const PoweredBy = React.memo(function PoweredBy(){
     </section>
   )
 })
+

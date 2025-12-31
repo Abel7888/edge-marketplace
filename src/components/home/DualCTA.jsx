@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
 import { ShoppingBag, CheckCircle2, ArrowRight, Briefcase, Plus, Telescope, Rocket } from 'lucide-react'
 
 export default function DualCTA() {
@@ -21,13 +20,10 @@ export default function DualCTA() {
     <section ref={sectionRef} className="relative py-0 min-h-[600px] overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Buyers panel */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+        <div
           onMouseEnter={() => setHovered('buyers')}
           onMouseLeave={() => setHovered(null)}
-          className={`relative group origin-center transform transition-transform duration-700 ${hovered === 'buyers' ? 'scale-[1.02]' : hovered === 'vendors' ? 'opacity-80' : ''}`}
+          className={`relative group origin-center transform transition-all duration-700 ${hovered === 'buyers' ? 'scale-[1.02]' : hovered === 'vendors' ? 'opacity-80' : ''}`}
         >
           <div className="relative px-12 py-20 lg:px-16 lg:py-24 min-h-[650px] lg:min-h-[700px] flex items-center overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-blue-900">
             {/* Background effects */}
@@ -81,16 +77,13 @@ export default function DualCTA() {
 
             <Telescope className="absolute bottom-6 right-6 text-white/20" size={300} aria-hidden />
           </div>
-        </motion.div>
+        </div>
 
         {/* Vendors panel */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+        <div
           onMouseEnter={() => setHovered('vendors')}
           onMouseLeave={() => setHovered(null)}
-          className={`relative group origin-center transform transition-transform duration-700 ${hovered === 'vendors' ? 'scale-[1.02]' : hovered === 'buyers' ? 'opacity-80' : ''}`}
+          className={`relative group origin-center transform transition-all duration-700 ${hovered === 'vendors' ? 'scale-[1.02]' : hovered === 'buyers' ? 'opacity-80' : ''}`}
         >
           <div className="relative px-12 py-20 lg:px-16 lg:py-24 min-h-[650px] lg:min-h-[700px] flex items-center overflow-hidden bg-gradient-to-br from-accent-900 via-purple-800 to-pink-900">
             {/* Background effects */}
@@ -143,7 +136,7 @@ export default function DualCTA() {
 
             <Rocket className="absolute bottom-6 right-6 text-white/20" size={300} aria-hidden />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* vertical divider (desktop) */}
@@ -160,3 +153,4 @@ function Metric({ number, label }) {
     </div>
   )
 }
+

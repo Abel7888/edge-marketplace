@@ -1,3 +1,6 @@
+﻿'use client'
+
+
 import React from 'react'
 
 function Section({ title, items }){
@@ -101,3 +104,4 @@ export default function DisplayInteractionXR(){
     </div>
   )
 }
+

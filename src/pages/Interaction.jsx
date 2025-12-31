@@ -562,6 +562,7 @@ export default function Interaction(){
   const scrollRef = useRef(null)
 
   const showWelcome = messages.length === 0
+  const savedCount = savedVendors.length
 
   useEffect(()=>{
     if (!scrollRef.current) return

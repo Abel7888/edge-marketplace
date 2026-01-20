@@ -196,7 +196,7 @@ export default function AI(){
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <section className="relative py-16 overflow-hidden">
-        <div className="relative max-w-7xl mx_auto px-6 text-center">
+        <div className="relative max-w-7xl mx-auto px-6 text-center">
           <div className="text-6xl">🤖</div>
           <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">Artificial Intelligence</h1>
           <div className="text-2xl text-gray-700 font-medium mb-6">Infra & enablement, productivity, applied AI, and governance</div>

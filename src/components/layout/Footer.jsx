@@ -24,8 +24,6 @@ function Footer() {
               <span>•</span>
               <Link href="/sponsorship" className="hover:text-gray-900">Sponsorship</Link>
               <span>•</span>
-              <Link href="/blog" className="hover:text-gray-900">Blog</Link>
-              <span>•</span>
               <button 
                 onClick={() => setShowContactModal(true)}
                 className="hover:text-gray-900"

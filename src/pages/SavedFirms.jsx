@@ -21,7 +21,7 @@ export default function SavedFirms() {
       return
     }
     loadSavedFirms()
-  }, [currentUser, navigate])
+  }, [currentUser, router])
 
   const loadSavedFirms = async () => {
     if (!currentUser) return

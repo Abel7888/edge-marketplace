@@ -8,12 +8,25 @@ export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Edge Marketplace - Emerging Tech Solutions',
-  description: 'Edge Marketplace - Discover, review, and connect with emerging technology vendors. AI, Blockchain, IoT, and beyond.',
+  description: 'Discover, review, and connect with emerging technology vendors. AI, Blockchain, IoT, and beyond.',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
     apple: '/logo-icon.svg',
   },
+  openGraph: {
+    title: 'Edge Marketplace - Emerging Tech Solutions',
+    description: 'Discover, review, and connect with emerging technology vendors. AI, Blockchain, IoT, and beyond.',
+    type: 'website',
+    url: 'https://edgemarketplace.xyz',
+    siteName: 'Edge Marketplace',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Edge Marketplace - Emerging Tech Solutions',
+    description: 'Discover, review, and connect with emerging technology vendors. AI, Blockchain, IoT, and beyond.',
+  },
+  metadataBase: new URL('https://edgemarketplace.xyz'),
 }
 
 export default function RootLayout({ children }) {
